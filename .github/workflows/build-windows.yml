@@ -16,8 +16,17 @@ jobs:
         arch:
           - name: x64
             os: windows-2022
+            force_build: ''
           - name: arm64
             os: windows-11-arm
+            force_build: '--force-build'
+        exclude:
+          - target-node: 22
+            arch:
+              name: arm64
+          - target-node: 24
+            arch:
+              name: arm64
 
     steps:
       - uses: actions/checkout@v4
@@ -37,7 +46,7 @@ jobs:
 
       - run: choco install nasm
 
-      - run: yarn start --node-range node${{ matrix.target-node }} --arch ${{ matrix.arch.name }} --output dist
+      - run: yarn start --node-range node${{ matrix.target-node }} --arch ${{ matrix.arch.name }} --output dist ${{ matrix.arch.force_build }}
 
       - name: Check if binary is compiled, skip if download only
         id: check_file
