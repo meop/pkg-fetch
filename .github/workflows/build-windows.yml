@@ -21,12 +21,11 @@ jobs:
             os: windows-11-arm
             force_build: '--force-build'
         exclude:
-          - target-node: 22
-            arch:
-              name: arm64
           - target-node: 24
             arch:
               name: arm64
+          - arch:
+              name: x64
 
     steps:
       - uses: actions/checkout@v4
