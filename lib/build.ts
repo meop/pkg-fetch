@@ -213,13 +213,6 @@ async function compileOnWindows(
     args.push('ltcg');
   }
 
-  // Node24 builds on Windows crash with small-icu at icudat codegen
-  // workaround for now is to enable full-icu
-  // TODO check with newer node/tooling/gh-image versions
-  if (major >= 24) {
-    args.push('full-icu');
-  }
-
   // Can't cross compile for arm64 with small-icu
   if (
     major < 24 &&

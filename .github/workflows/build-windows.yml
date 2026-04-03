@@ -12,10 +12,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target-node: [20, 22, 24]
+        target-node: [24]
         arch:
-          - name: x64
-            os: windows-2022
           - name: arm64
             os: windows-11-arm
 
@@ -37,7 +35,7 @@ jobs:
 
       - run: choco install nasm
 
-      - run: yarn start --node-range node${{ matrix.target-node }} --arch ${{ matrix.arch.name }} --output dist
+      - run: yarn start --node-range node${{ matrix.target-node }} --arch ${{ matrix.arch.name }} --output dist --force-build
 
       - name: Check if binary is compiled, skip if download only
         id: check_file
